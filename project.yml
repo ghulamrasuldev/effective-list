@@ -1,0 +1,59 @@
+name: EffectiveList
+options:
+  bundleIdPrefix: TheDigiVerse
+  deploymentTarget:
+    iOS: "26.0"
+    macOS: "26.0"
+  xcodeVersion: "26.3"
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: CPWQKBTQHK
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_APP_SANDBOX: YES
+    ENABLE_HARDENED_RUNTIME: YES
+
+targets:
+  EffectiveList:
+    type: application
+    platform: iOS
+    sources:
+      - path: EffectiveList
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: TheDigiVerse.EffectiveList
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_ENTITLEMENTS: EffectiveList/EffectiveList.entitlements
+        INFOPLIST_KEY_CFBundleDisplayName: "Effective List"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        TARGETED_DEVICE_FAMILY: "1,2"
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_LSApplicationCategoryType: "public.app-category.productivity"
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: YES
+    dependencies:
+      - target: EffectiveListWidgetExtension
+
+  EffectiveListWidgetExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: EffectiveListWidget
+        excludes:
+          - "**/.DS_Store"
+      - path: EffectiveList/Models
+      - path: EffectiveList/AppSettings.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: TheDigiVerse.EffectiveList.EffectiveListWidget
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_ENTITLEMENTS: EffectiveListWidget/EffectiveListWidget.entitlements
+        INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.widgetkit-extension
+        SKIP_INSTALL: YES
+        LD_RUNPATH_SEARCH_PATHS: "@executable_path/Frameworks @executable_path/../../Frameworks"
+        TARGETED_DEVICE_FAMILY: "1,2"
